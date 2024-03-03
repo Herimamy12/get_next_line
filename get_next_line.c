@@ -14,8 +14,14 @@
 
 char	*get_next_line(int fd)
 {
-	char	*line;
-	char	*buff;
-	char	*stash;
-	ssize_t	res;
+	char		*line;
+	char		*buff;
+	static char	*stash;
+	ssize_t		res;
+
+	buff = (char *)malloc(sizeof(char) * BUFFER_SIZE);
+	res = read(fd, buff, BUFFER_SIZE);
+	stash = (char *)malloc(sizeof(char) * BUFFER_SIZE);
+	stash = ft_strjoin(stash, buff);
+	line = 
 }
