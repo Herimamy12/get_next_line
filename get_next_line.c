@@ -11,3 +11,11 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*get_next_line(int fd)
+{
+	char	*line;
+	char	*buff;
+	char	*stash;
+	ssize_t	res;
+}
