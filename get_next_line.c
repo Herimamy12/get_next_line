@@ -17,8 +17,10 @@ char	*ft_restash(char *stash)
 	int		i;
 	int		j;
 	char	*newstash;
+	size_t	len;
 
 	i = 0;
+	len = ft_strlen(stash);
 	while (stash[i] && stash[i] != '\n')
 		i++;
 	if (!stash[i])
@@ -26,7 +28,7 @@ char	*ft_restash(char *stash)
 		free(stash);
 		return (NULL);
 	}
-	newstash = (char *)malloc(sizeof(char) * (ft_strlen(stash) - i + 1));
+	newstash = (char *)malloc(sizeof(char) * (len - i + 1));
 	if (!newstash)
 		return (NULL);
 	i++;
@@ -45,6 +47,8 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
+	if (!stash)
+		stash = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	stash = ft_createstash(fd, stash);
 	if (!stash)
 		return (NULL);

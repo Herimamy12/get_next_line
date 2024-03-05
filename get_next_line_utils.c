@@ -44,7 +44,7 @@ char	*ft_strchr(char *stash, int c)
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	int		i;
+	size_t	i;
 	char	*str;
 	size_t	ls1;
 	size_t	ls2;
@@ -70,19 +70,23 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (str);
 }
 
+#include <stdio.h>
+
 char	*ft_createstash(int fd, char *stash)
 {
 	int		nbytes;
+	char	c;
 	char	*buff;
 
 	buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
 		return (NULL);
+	c = '\n';
 	nbytes = 1;
-	while (!ft_strchr(stash, '\n') && nbytes != 0)
+	while (!ft_strchr(stash, c) && nbytes != 0)
 	{
 		nbytes = read(fd, buff, BUFFER_SIZE);
-		if (nbytes == -1)
+		if (nbytes == -1 || (nbytes == 0 && stash == NULL))
 		{
 			free(buff);
 			return (NULL);
