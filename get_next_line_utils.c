@@ -22,6 +22,26 @@ size_t	ft_strlen(const char *str)
 	return (len);
 }
 
+char	*ft_strchr(char *stash, int c)
+{
+	char	*tmp;
+	size_t	i;
+	size_t	len;
+
+	i = 0;
+	len = ft_strlen(stash);
+	while (i < len)
+	{
+		tmp = (char *)&stash[i];
+		if (stash[i] == (char)c)
+			return (tmp);
+		i++;
+	}
+	if ((char)c == '\0')
+		return ((char *)&stash[i]);
+	return (0);
+}
+
 char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
@@ -29,12 +49,10 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	ls1;
 	size_t	ls2;
 
-	if (!s1 || !s2)
-		return (NULL);
 	ls1 = ft_strlen(s1);
 	ls2 = ft_strlen(s2);
 	str = (char *)malloc(sizeof(char) * (ls2 + ls1 + 1));
-	if (str == NULL);
+	if (str == NULL)
 		return (NULL);
 	i = 0;
 	while (i < ls1)
@@ -48,6 +66,58 @@ char	*ft_strjoin(char *s1, char *s2)
 		str[i + ls1] = s2[i];
 		i++;
 	}
-	str[i] = '\0';
+	str[i + ls1] = '\0';
 	return (str);
+}
+
+char	*ft_createstash(int fd, char *stash)
+{
+	int		nbytes;
+	char	*buff;
+
+	buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buff)
+		return (NULL);
+	nbytes = 1;
+	while (!ft_strchr(stash, '\n') && nbytes != 0)
+	{
+		nbytes = read(fd, buff, BUFFER_SIZE);
+		if (nbytes == -1)
+		{
+			free(buff);
+			return (NULL);
+		}
+		buff[nbytes] = '\0';
+		stash = ft_strjoin(stash, buff);
+	}
+	free(buff);
+	return (stash);
+}
+
+char	*ft_createline(char	*stash)
+{
+	int		i;
+	char	*line;
+
+	i = 0;
+	if (!stash)
+		return (NULL);
+	while (stash[i] && stash[i] != '\n')
+		i++;
+	line = (char *)malloc(sizeof(char) * (i + 2));
+	if (!line)
+		return (NULL);
+	i = 0;
+	while (stash[i] && stash[i] != '\n')
+	{
+		line[i] = stash[i];
+		i++;
+	}
+	if (stash[i] == '\n')
+	{
+		line[i] = stash[i];
+		i++;
+	}
+	line[i] = '\0';
+	return (line);
 }
