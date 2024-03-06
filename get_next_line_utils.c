@@ -70,8 +70,6 @@ char	*ft_strjoin(char *stash, char *buff)
 	return (str);
 }
 
-#include <stdio.h>
-
 char	*ft_createstash(int fd, char *stash)
 {
 	int		nbytes;
