@@ -45,7 +45,7 @@ char	*ft_restash(char *stash)
 		free(stash);
 		return (NULL);
 	}
-	newstash = (char *)malloc(sizeof(char) * (len - i + 1));
+	newstash = ft_calloc(sizeof(char), (len - i + 1));
 	if (!newstash)
 		return (NULL);
 	i++;

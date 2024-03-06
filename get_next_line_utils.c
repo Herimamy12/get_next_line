@@ -51,7 +51,7 @@ char	*ft_strjoin(char *stash, char *buff)
 
 	ls1 = ft_strlen(stash);
 	ls2 = ft_strlen(buff);
-	str = (char *)malloc(sizeof(char) * (ls2 + ls1 + 1));
+	str = ft_calloc(sizeof(char), (ls2 + ls1 + 1));
 	if (str == NULL)
 		return (NULL);
 	i = 0;
@@ -67,6 +67,7 @@ char	*ft_strjoin(char *stash, char *buff)
 		i++;
 	}
 	str[i + ls1] = '\0';
+	free(stash);
 	return (str);
 }
 
@@ -76,7 +77,7 @@ char	*ft_createstash(int fd, char *stash)
 	char	c;
 	char	*buff;
 
-	buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	buff = ft_calloc(sizeof(char), (BUFFER_SIZE + 1));
 	if (!buff)
 		return (NULL);
 	c = '\n';
@@ -87,6 +88,7 @@ char	*ft_createstash(int fd, char *stash)
 		if (nbytes == -1)
 		{
 			free(buff);
+			free(stash);
 			return (NULL);
 		}
 		buff[nbytes] = '\0';
@@ -102,11 +104,11 @@ char	*ft_createline(char	*stash)
 	char	*line;
 
 	i = 0;
-	if (!stash[i])
+	if (!stash[i] || stash == NULL)
 		return (NULL);
 	while (stash[i] && stash[i] != '\n')
 		i++;
-	line = (char *)malloc(sizeof(char) * (i + 2));
+	line = ft_calloc(sizeof(char), (i + 2));
 	if (!line)
 		return (NULL);
 	i = 0;
