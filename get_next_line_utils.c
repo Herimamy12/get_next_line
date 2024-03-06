@@ -102,7 +102,7 @@ char	*ft_createline(char	*stash)
 	char	*line;
 
 	i = 0;
-	if (!stash)
+	if (!stash[i])
 		return (NULL);
 	while (stash[i] && stash[i] != '\n')
 		i++;
