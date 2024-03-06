@@ -22,7 +22,8 @@
 
 size_t	ft_strlen(const char *str);
 char	*ft_strchr(char *stash, int c);
-char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strjoin(char *stash, char *buff);
+void	*ft_calloc(size_t BUFFS, size_t szofcar);
 char	*ft_createstash(int fd, char *stash);
 char	*ft_createline(char	*stash);
 char	*ft_restash(char *stash);

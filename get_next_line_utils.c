@@ -42,28 +42,28 @@ char	*ft_strchr(char *stash, int c)
 	return (0);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *stash, char *buff)
 {
 	size_t	i;
 	char	*str;
 	size_t	ls1;
 	size_t	ls2;
 
-	ls1 = ft_strlen(s1);
-	ls2 = ft_strlen(s2);
+	ls1 = ft_strlen(stash);
+	ls2 = ft_strlen(buff);
 	str = (char *)malloc(sizeof(char) * (ls2 + ls1 + 1));
 	if (str == NULL)
 		return (NULL);
 	i = 0;
 	while (i < ls1)
 	{
-		str[i] = s1[i];
+		str[i] = stash[i];
 		i++;
 	}
 	i = 0;
 	while (i < ls2)
 	{
-		str[i + ls1] = s2[i];
+		str[i + ls1] = buff[i];
 		i++;
 	}
 	str[i + ls1] = '\0';
@@ -86,7 +86,7 @@ char	*ft_createstash(int fd, char *stash)
 	while (!ft_strchr(stash, c) && nbytes != 0)
 	{
 		nbytes = read(fd, buff, BUFFER_SIZE);
-		if (nbytes == -1 || (nbytes == 0 && stash == NULL))
+		if (nbytes == -1)
 		{
 			free(buff);
 			return (NULL);

@@ -12,6 +12,23 @@
 
 #include "get_next_line.h"
 
+void	*ft_calloc(size_t BUFFS, size_t szofcar)
+{
+	char	*stash;
+	size_t	i;
+
+	i = 0;
+	stash = (char *)malloc(BUFFS * szofcar);
+	if (!stash)
+		return (NULL);
+	while (i < (BUFFS * szofcar))
+	{
+		stash[i] = '\0';
+		i++;
+	}
+	return ((void *)stash);
+}
+
 char	*ft_restash(char *stash)
 {
 	int		i;
@@ -48,7 +65,9 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!stash)
-		stash = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+		stash = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
+	if (!stash)
+		return (NULL);
 	stash = ft_createstash(fd, stash);
 	if (!stash)
 		return (NULL);
