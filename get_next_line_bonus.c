@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nherimam <nherimam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/03 11:19:35 by nherimam          #+#    #+#             */
-/*   Updated: 2024/03/03 11:19:41 by nherimam         ###   ########.fr       */
+/*   Created: 2024/04/21 10:24:39 by nherimam          #+#    #+#             */
+/*   Updated: 2024/04/21 10:30:27 by nherimam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	*ft_calloc(size_t BUFFS, size_t szofcar)
 {
@@ -59,16 +59,16 @@ char	*ft_restash(char *stash)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*stash;
+	static char	*stash[1024];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!stash)
-		stash = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
-	stash = ft_createstash(fd, stash);
-	if (stash == NULL)
+	if (!stash[fd])
+		stash[fd] = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
+	stash[fd] = ft_createstash(fd, stash[fd]);
+	if (stash[fd] == NULL)
 		return (NULL);
-	line = ft_createline(stash);
-	stash = ft_restash(stash);
+	line = ft_createline(stash[fd]);
+	stash[fd] = ft_restash(stash[fd]);
 	return (line);
 }
