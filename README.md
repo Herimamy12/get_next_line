@@ -102,10 +102,6 @@ Les contributions à ce projet sont les bienvenues ! Si vous souhaitez participe
 
 Nous vous encourageons également à ajouter des tests unitaires pour garantir la stabilité du projet et éviter toute régression.
 
-## Licence
-
-Ce projet est sous licence de l'ecole 42 Antananarivo. Pour plus d'informations, veuillez consulter le fichier [LICENSE](https://42antananarivo.mg/mentions-legales/).
-
 ## Remerciements
 
 Un grand merci pour tous ceux qui ont contribué directement ou indirectement à ce projet.
