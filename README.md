@@ -104,4 +104,8 @@ Nous vous encourageons également à ajouter des tests unitaires pour garantir l
 
 ## Remerciements
 
-Un grand merci pour tous ceux qui ont contribué directement ou indirectement à ce projet.
+Merci à l'école 42 pour cette incroyable opportunité d'apprentissage et pour le soutien de la communauté. Un grand merci également à tous ceux qui ont contribué directement ou indirectement à ce projet.
+
+#### Auteurs
+
+- [Herimamy12](https://github.com/Herimamy12)
