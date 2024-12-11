@@ -14,12 +14,11 @@
 #include <stdio.h>
 #include <fcntl.h>
 
-int	main(int argc, char *argv[])
+int	main(void)
 {
 	int		i;
 	int		fd;
 	char	*line;
-	char	*line2;
 
 	i = 0;
 	fd = open("file", O_RDONLY);
